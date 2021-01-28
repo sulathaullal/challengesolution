@@ -1,0 +1,117 @@
+<div class="maindiv"><h1>Football players' rushing statistics</h1>
+<div class="align-right">
+  <label class="label">Download file as:</label>
+  <button mat-raised-button (click)="exporter.exportTable('xlsx',{fileName:'footballers_data'})">Excel</button>
+  <button mat-raised-button (click)="exporter.exportTable('csv',{fileName:'footballers_data'})">CSV</button>
+  <button mat-raised-button (click)="exporter.exportTable('json',{fileName:'footballers_data'})">JSON</button>
+  <button mat-raised-button (click)="exporter.exportTable('txt',{fileName:'footballers_data'})">TXT</button>
+</div>
+<label class="label">Enter Player Name to filter:</label>
+<mat-form-field class="input">
+  <input matInput type="text" (keyup)="doFilter($event.target.value)">
+</mat-form-field>
+<div class="table">
+  <mat-table matTableFilter matTableExporter [dataSource]="matTableDataSource" #exporter="matTableExporter"  matSort  aria-label="Elements">
+    <!-- Player Column -->
+    <ng-container matColumnDef="player">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Player</th>
+      <td mat-cell *matCellDef="let row">{{row.Player}}</td>
+    </ng-container>
+
+    <!-- Team Column -->
+    <ng-container matColumnDef="team">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Team</th>
+      <td mat-cell *matCellDef="let row">{{row.Team}}</td>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Position</th>
+      <td mat-cell *matCellDef="let row">{{row.Pos}}</td>
+    </ng-container>
+
+	<!-- Attempts Column -->
+    <ng-container matColumnDef="attempts">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Attempts</th>
+      <td mat-cell *matCellDef="let row">{{row.Att}}</td>
+    </ng-container>
+
+    <!-- Attempts per game Column -->
+    <ng-container matColumnDef="attemptsPerGame">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>AttemptsPerGame</th>
+      <td mat-cell *matCellDef="let row">{{row["Att/G"]}}</td>
+    </ng-container>
+     
+    <!-- Yards Column -->
+    <ng-container matColumnDef="yards">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Yards</th>
+      <td mat-cell *matCellDef="let row">{{row.Yds}}</td>
+    </ng-container>
+
+    <!-- Avergae yards per game Column -->
+    <ng-container matColumnDef="avgYards">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>AverageYards</th>
+      <td mat-cell *matCellDef="let row">{{row.Avg}}</td>
+    </ng-container>
+
+     <!--  yards per game Column -->
+     <ng-container matColumnDef="yardsPerGame">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Yards/Game</th>
+      <td mat-cell *matCellDef="let row">{{row["Yds/G"]}}</td>
+    </ng-container>
+
+    <!-- Touchdowns Column -->
+    <ng-container matColumnDef="touchDowns">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>TouchDowns</th>
+      <td mat-cell *matCellDef="let row">{{row.TD}}</td>
+    </ng-container>
+
+     <!-- Longest Rush Column -->
+     <ng-container matColumnDef="longestRush">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>LongestRush</th>
+      <td mat-cell *matCellDef="let row">{{row.Lng}}</td>
+    </ng-container>
+
+     <!-- First Dowmns Column -->
+     <ng-container matColumnDef="firstDowns">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>FirstDowmns</th>
+      <td mat-cell *matCellDef="let row">{{row["1st"]}}</td>
+    </ng-container>
+
+     <!-- First downs percentage Column -->
+     <ng-container matColumnDef="firstDownsPercentage">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>FirstDowmns%</th>
+      <td mat-cell *matCellDef="let row">{{row["1st%"]}}</td>
+    </ng-container>
+
+    <!-- 20+ yards Column -->
+    <ng-container matColumnDef="twentyPlusYards">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>20+yards</th>
+      <td mat-cell *matCellDef="let row">{{row["20+"]}}</td>
+    </ng-container>
+
+     <!-- 40 + yards Column -->
+     <ng-container matColumnDef="fortyPlusYards">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>40+yards</th>
+      <td mat-cell *matCellDef="let row">{{row["40+"]}}</td>
+    </ng-container>
+
+    <!-- Fumbles Column -->
+    <ng-container matColumnDef="fumbles">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fumbles</th>
+      <td mat-cell *matCellDef="let row">{{row.FUM}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </mat-table>
+
+  <mat-paginator 
+      [length]="matTableDataSource?.data.length"
+      [pageIndex]="0"
+      [pageSize]="10"
+      [pageSizeOptions]="[10,50, 100, 250]"
+      showFirstLastButtons = true;>
+  </mat-paginator>
+</div>
+</div>

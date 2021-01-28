@@ -1,0 +1,31 @@
+.maindiv {
+    width: 80%;
+    margin: 20px auto;
+  }
+  
+  .mat-sort-header-container {
+    align-items: center;
+    font-size:medium;
+  }
+  .table{
+    border: solid 2px black;
+  }
+  .input {
+    border: solid 0px #7d7e81;
+    padding: 10px;
+    font-size: 1.2em;
+    width: 30%;
+    text-align: left;
+  }
+  .label{
+    text-align:left;
+  }
+
+  .button{
+    float: right;
+
+  }
+  .align-right {
+    text-align: right;
+    border: 0;
+  }
